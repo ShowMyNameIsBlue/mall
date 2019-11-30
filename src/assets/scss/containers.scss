@@ -3,7 +3,7 @@
 .g-container {
   overflow: hidden;
   position: relative;
-  width: 9.375rem;
+  width: 100%;
   max-width: 16rem;
   min-width: 8rem;
   height: 100%;
@@ -15,11 +15,26 @@
   padding-bottom: $tabbar-height;
 }
 
+.g-header-container {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  z-index: $navbar-z-index;
+}
+
 .g-footer-container {
   position: absolute;
   left: 0;
   bottom: 0;
-  width: 9.375rem;
+  width: 100%;
   z-index: $tabbar-z-index;
-  box-shadow: 0 0 10px 0 hsla(0, 6%, 58%, 0.6);
+  box-shadow: 0 0 0.25rem 0 hsla(0, 6%, 58%, 0.6);
+}
+
+.g-backtop-container {
+  position: absolute;
+  z-index: $backtop-z-index;
+  right: 0.25rem;
+  bottom: $tabbar-height + 0.25rem;
 }
