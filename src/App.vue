@@ -1,13 +1,20 @@
 <template>
-  <div id="app">
-    <h1>hello world</h1>
+  <div id="app" class="g-container">
+    <div class="g-view-container">
+      <router-view></router-view>
+    </div>
+    <div class="g-footer-container">
+      <c-tabbar />
+    </div>
   </div>
 </template>
 
 <script>
+import CTabbar from '@comp/tabbar'
 export default {
-  data() {
-    return {}
+  name: 'App',
+  components: {
+    CTabbar
   }
 }
 </script>

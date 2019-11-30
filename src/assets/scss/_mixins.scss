@@ -1,4 +1,4 @@
-@import "variables";
+@import 'variables';
 
 // flex-center
 @mixin flex-center($direction: row) {
@@ -7,7 +7,6 @@
   align-items: center;
   flex-direction: $direction;
 }
-
 //ellipsis
 @mixin ellipsis() {
   overflow: hidden;
