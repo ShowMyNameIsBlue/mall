@@ -30,6 +30,11 @@ export default {
       }
     }
   },
+  watch: {
+    data(newData) {
+      if (newData.length === 0) this.keyId = Math.random()
+    }
+  },
   components: {
     swiper
   },

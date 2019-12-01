@@ -3,13 +3,24 @@
     <span class="mine-loading-indicator" v-if="indicator === 'on'">
       <slot><img src="./loading.gif" alt=""/></slot>
     </span>
-    <div class="mine-loading-text" v-if="text">{{ text }}</div>
+    <div class="mine-loading-text" v-if="loadingText">{{ loadingText }}</div>
   </div>
 </template>
 
 <script>
+import { METHODS } from 'http'
 export default {
   name: 'MeLoading',
+  data() {
+    return {
+      loadingText: this.text
+    }
+  },
+  watch: {
+    text(text) {
+      this.loadingText = text
+    }
+  },
   props: {
     indicator: {
       type: String,
@@ -26,6 +37,11 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+  methods: {
+    setText(text) {
+      this.loadingText = text
+    }
   }
 }
 </script>
@@ -37,7 +53,7 @@ export default {
   width: 100%;
   height: 100%;
   @include flex-center(column);
-  &.mine-loading-inle {
+  &.mine-loading-line {
     flex-direction: row;
     .mine-loading-indicator ~ .mine-loading-text {
       margin-top: 0;
