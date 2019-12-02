@@ -25,7 +25,7 @@ export default {
 @import '~@assets/scss/mixins';
 .nav {
   width: 100%;
-  padding-top: 15px;
+  padding-top: 0.375rem;
   background-color: #fff;
 
   &-list {
@@ -35,7 +35,7 @@ export default {
 
   &-item {
     width: 20%;
-    margin-bottom: 15px;
+    margin-bottom: 0.375rem;
   }
 
   &-link {
@@ -44,7 +44,7 @@ export default {
 
   &-pic {
     width: 60%;
-    margin-bottom: 8px;
+    margin-bottom: 0.2rem;
   }
 }
 </style>

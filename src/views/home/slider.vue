@@ -58,7 +58,7 @@ export default {
 <style lang="scss" scoped>
 .slider-wapper {
   width: 100%;
-  height: 183px;
+  height: 4.575rem;
 }
 
 .slider-link {

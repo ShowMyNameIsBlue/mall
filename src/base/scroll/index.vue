@@ -215,11 +215,11 @@ export default {
 }
 .mine-scroll-pull-down {
   bottom: 100%;
-  height: 80px;
+  height: 2rem;
 }
 
 .mine-scroll-pull-up {
   top: 100%;
-  height: 30px;
+  height: 0.75rem;
 }
 </style>

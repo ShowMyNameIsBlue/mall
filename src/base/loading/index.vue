@@ -56,7 +56,7 @@ export default {
     flex-direction: row;
     .mine-loading-indicator ~ .mine-loading-text {
       margin-top: 0;
-      margin-left: 6px;
+      margin-left: 0.15rem;
     }
   }
 }

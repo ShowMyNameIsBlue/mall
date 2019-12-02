@@ -1,0 +1,205 @@
+<template>
+  <div class="content-wrapper">
+    <div class="loading-container" v-if="isLoading">
+      <div class="loading-wrapper">
+        <me-loading />
+      </div>
+    </div>
+    <me-scroll ref="scroll">
+      <div class="content">
+        <div class="pic" v-if="content.banner">
+          <a :href="content.banner.linkUrl" class="pic-link">
+            <img
+              @load="updateScroll"
+              :src="content.banner.picUrl"
+              alt=""
+              class="pic-img"
+            />
+          </a>
+        </div>
+        <div
+          class="section"
+          v-for="(section, index) in content.data"
+          :key="index"
+        >
+          <h4 class="section-title">{{ section.name }}</h4>
+          <ul class="section-list">
+            <li
+              class="section-item"
+              v-for="(item, i) in section.itemList"
+              :key="i"
+            >
+              <a :href="item.linkUrl" class="section-link">
+                <p class="section-pic" v-if="item.picUrl">
+                  <img v-lazy="item.picUrl" alt="" class="section-img" />
+                </p>
+                <p class="section-name">{{ item.name }}</p>
+              </a>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </me-scroll>
+    <div class="g-backtop-container">
+      <me-backtop @backtop="backToTop" :visible="isBacktopVisible" />
+    </div>
+  </div>
+</template>
+
+<script>
+import MeLoading from '@base/loading'
+import MeScroll from '@base/scroll'
+import MeBacktop from '@base/backtop'
+import { getCategoryContent } from '@api/category'
+// import storage from 'assets/js/storage';
+// import {CATEGORY_CONTENT_KEY, CATEGORY_CONTENT_UPDATE_TIME_INTERVAL} from './config';
+
+export default {
+  name: 'CategoryContent',
+  components: {
+    MeLoading,
+    MeScroll,
+    MeBacktop
+  },
+  props: {
+    curId: {
+      type: String,
+      default: null
+    }
+  },
+  data() {
+    return {
+      content: {},
+      isBacktopVisible: false,
+      isLoading: false
+    }
+  },
+  watch: {
+    curId(id) {
+      this.isLoading = true
+      this.getContent(id).then(() => {
+        this.isLoading = false
+        this.backToTop(0)
+      })
+    }
+  },
+  methods: {
+    backToTop(speed) {
+      this.$refs.scroll && this.$refs.scroll.scrollToTop(speed)
+    },
+    getContent(id) {
+      return getCategoryContent(id).then(data => {
+        if (data) {
+          this.content = data
+        }
+      })
+    },
+    updateScroll() {
+      this.$refs.scroll && this.$refs.scroll.update()
+    }
+  }
+}
+</script>
+
+<style lang="scss" scoped>
+@import '~@assets/scss/mixins';
+
+.content-wrapper {
+  position: relative;
+  height: 100%;
+}
+
+.loading-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: $category-popup-z-index;
+  @include flex-center();
+  width: 100%;
+  height: 100%;
+  // background-color: $modal-bgc;
+
+  .mine-loading {
+    color: #fff;
+    font-size: 0.35rem;
+  }
+}
+.loading-wrapper {
+  width: 50%;
+  padding: 0.75rem 0;
+  background-color: $modal-bgc;
+  border-radius: 0.1rem;
+}
+
+.content {
+  padding: 0.25rem;
+}
+
+.pic {
+  margin-bottom: 0.3rem;
+
+  &-link {
+    display: block;
+  }
+
+  &-img {
+    width: 100%;
+  }
+}
+
+.section {
+  margin-bottom: 0.3rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+
+  &-title {
+    height: 0.7rem;
+    line-height: 0.7rem;
+    color: #080808;
+    font-weight: bold;
+  }
+
+  &-list {
+    display: flex;
+    flex-wrap: wrap;
+    background-color: #fff;
+    padding: 0.25rem 0.25rem 0;
+  }
+
+  &-item {
+    width: (100% / 3);
+  }
+
+  &-link {
+    display: block;
+  }
+
+  &-pic {
+    position: relative;
+    width: 80%;
+    padding-bottom: 80%;
+    margin: 0 auto;
+  }
+
+  &-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+  }
+
+  &-name {
+    height: 0.9rem;
+    line-height: 0.9rem;
+    text-align: center;
+    @include ellipsis();
+  }
+}
+
+.g-backtop-container {
+  bottom: 0.25rem;
+}
+</style>

@@ -33,11 +33,11 @@ export default {
 .mine-navbar {
   position: relative;
   @include flex-between();
-  height: 50px;
+  height: 1.25rem;
   background-color: #fff;
 
   &-left {
-    margin-left: 10px;
+    margin-left: 0.25rem;
 
     ~ .mine-navbar-right {
       position: static;
@@ -46,7 +46,7 @@ export default {
 
   &-center {
     flex: 1;
-    margin: 0 10px;
+    margin: 0 0.25rem;
 
     ~ .mine-navbar-right {
       position: static;
@@ -58,7 +58,7 @@ export default {
     right: 0;
     @include flex-center();
     height: 100%;
-    margin-right: 10px;
+    margin-right: 0.25rem;
   }
 
   &-title {
@@ -72,7 +72,7 @@ export default {
   }
   &-text {
     width: 100%;
-    font-size: 18px;
+    font-size: 0.45rem;
     text-align: center;
     line-height: 1.5;
     @include ellipsis();
