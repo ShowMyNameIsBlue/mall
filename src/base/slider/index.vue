@@ -12,8 +12,22 @@ export default {
   name: 'MeSlider',
   data() {
     return {
-      keyId: Math.random(),
-      swiperOption: {
+      keyId: Math.random()
+    }
+  },
+  watch: {
+    data(newData) {
+      if (newData.length === 0) return
+      this.swiperOption.loop = this.data.length <= 1 ? false : this.loop
+      this.keyId = Math.random()
+    }
+  },
+  created() {
+    this.init()
+  },
+  methods: {
+    init() {
+      this.swiperOption = {
         watchOverflow: true,
         direction: this.direction,
         autoplay: this.interval
@@ -28,11 +42,6 @@ export default {
           el: this.pagination ? '.swiper-pagination' : null
         }
       }
-    }
-  },
-  watch: {
-    data(newData) {
-      if (newData.length === 0) this.keyId = Math.random()
     }
   },
   components: {

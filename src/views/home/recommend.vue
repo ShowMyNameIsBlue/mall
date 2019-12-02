@@ -50,15 +50,23 @@ export default {
     }
   },
   methods: {
+    update() {
+      return this.getRecommend()
+    },
     getRecommend() {
-      if (this.curPage > this.totalPage) return
-      getHomeRecommend(this.curPage).then(data => {
-        if (data) {
-          this.page++
-          this.totalPage = data.totalPage
-          this.recommends = this.recommends.concat(data.itemList)
-          this.$emit('loaded', this.recommends)
-        }
+      if (this.curPage > this.totalPage) {
+        return Promise.reject(new Error('没有更多了'))
+      }
+      return getHomeRecommend(this.curPage).then(data => {
+        return new Promise(resolve => {
+          if (data) {
+            this.page++
+            this.totalPage = data.totalPage
+            this.recommends = this.recommends.concat(data.itemList)
+            this.$emit('loaded', this.recommends)
+            resolve()
+          }
+        })
       })
     }
   },
