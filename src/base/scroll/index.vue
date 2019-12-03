@@ -90,7 +90,9 @@ export default {
       this.pullUpText = PULL_UP_TEXT_INIT
     },
     update() {
-      this.$refs.swiper && this.$refs.swiper.swiper.update()
+      this.$nextTick(() => {
+        this.$refs.swiper && this.$refs.swiper.swiper.update()
+      })
     },
     scroll() {
       const swiper = this.$refs.swiper.swiper

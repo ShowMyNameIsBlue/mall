@@ -2,15 +2,18 @@
   <transition name="search">
     <div class="search">
       <header class="g-header-container">
-        <search-header />
+        <search-header @query="getQuery" />
       </header>
       <div class="g-content-container">
-        <me-scroll>
-          <search-hot></search-hot>
+        <me-scroll ref="scroll">
+          <search-hot v-show="!query" @loaded="updateScroll"></search-hot>
           <search-history
             @show-confirm="showConfirm"
             ref="history"
+            v-show="!query"
+            @remove-item="updateScroll"
           ></search-history>
+          <search-result v-show="query" :query="query"></search-result>
         </me-scroll>
       </div>
       <me-confirm
@@ -24,7 +27,6 @@
 
 <script>
 import MeScroll from '@base/scroll'
-// import MeConfirm from '@base/confirm'
 import SearchHeader from './header'
 import SearchHot from './hot'
 import SearchHistory from './history'
@@ -34,7 +36,8 @@ import MeConfirm from '@base/confirm'
 export default {
   data() {
     return {
-      msg: '你确定要清空吗'
+      msg: '你确定要清空吗',
+      query: ''
     }
   },
   name: 'Search',
@@ -47,6 +50,12 @@ export default {
     SearchResult
   },
   methods: {
+    updateScroll() {
+      this.$refs.scroll.update()
+    },
+    getQuery(query) {
+      this.query = query
+    },
     showConfirm() {
       this.$refs.confirm.show()
     },
