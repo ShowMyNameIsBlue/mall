@@ -41,7 +41,7 @@ export const getHomeSlider = () => {
       if (err) console.log(console.error(err))
       return [
         {
-          linkUrl: 'https://www.imooc.com',
+          linkUrl: 'https://www.taobao.com',
           picUrl: require('@assets/img/404.png')
         }
       ]
@@ -74,7 +74,7 @@ export const getHomeRecommend = (
       if (err) console.log(console.error(err))
       return [
         {
-          linkUrl: 'https://www.imooc.com',
+          linkUrl: 'https://www.taobao.com',
           picUrl: require('@assets/img/404.png')
         }
       ]
